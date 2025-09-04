@@ -9,7 +9,7 @@ env:
   SERVICE: flight-service
   IMAGE_SHA: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:${{ github.sha }}
   IMAGE_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:latest
-  GITOPS_REPO: Travel-web-project/Travel-gitOps
+  GITOPS_REPO: Tracel-web-project/Travel-gitOps
   GITOPS_DEPLOYMENT_PATH: base/flight-service/kustomization.yaml
   GITOPS_BRANCH_PREFIX: ci/update-flight-service
 
@@ -41,7 +41,7 @@ jobs:
         with:
           repository: ${{ env.GITOPS_REPO }}
           path: gitops
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITOPS_PAT }}
 
       - name: Update Kustomization
         run: |
