@@ -45,8 +45,9 @@ jobs:
 
       - name: Update Kustomization
         run: |
-          cd gitops/${{ env.GITOPS_DEPLOYMENT_PATH }}
+          cd gitops/base/flight-service
           kustomize edit set image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.SERVICE }}=${{ env.IMAGE_SHA }}
+    
 
       - name: Commit and Push changes
         run: |
