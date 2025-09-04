@@ -9,7 +9,7 @@ env:
   SERVICE: flight-service
   IMAGE_SHA: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:${{ github.sha }}
   IMAGE_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:latest
-  GITOPS_REPO: Travel-web-project/travel-gitops
+  GITOPS_REPO: Travel-web-project/Travel-gitOps
   GITOPS_DEPLOYMENT_PATH: base/flight-service/kustomization.yaml
   GITOPS_BRANCH_PREFIX: ci/update-flight-service
 
