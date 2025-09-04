@@ -7,8 +7,8 @@ on:
 
 env:
   SERVICE: flight-service
-  IMAGE_SHA: ${{ secrets.DOCKER_USERNAME }}/flight-service:${{ github.sha }}
-  IMAGE_LATEST: ${{ secrets.DOCKER_USERNAME }}/flight-service:latest
+  IMAGE_SHA: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:${{ github.sha }}
+  IMAGE_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:latest
   GITOPS_REPO: Travel-web-project/travel-gitops
   GITOPS_DEPLOYMENT_PATH: base/flight-service/kustomization.yaml
   GITOPS_BRANCH_PREFIX: ci/update-flight-service
@@ -24,8 +24,8 @@ jobs:
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
@@ -46,7 +46,7 @@ jobs:
       - name: Update Kustomization
         run: |
           cd gitops/${{ env.GITOPS_DEPLOYMENT_PATH }}
-          kustomize edit set image ${{ secrets.DOCKER_USERNAME }}/${{ env.SERVICE }}=${{ env.IMAGE_SHA }}
+          kustomize edit set image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.SERVICE }}=${{ env.IMAGE_SHA }}
 
       - name: Commit and Push changes
         run: |
