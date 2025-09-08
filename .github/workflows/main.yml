@@ -10,7 +10,7 @@ env:
   IMAGE_SHA: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:${{ github.sha }}
   IMAGE_LATEST: ${{ secrets.DOCKERHUB_USERNAME }}/flight-service:latest
   GITOPS_REPO: Tracel-web-project/Travel-gitOps
-  GITOPS_DEPLOYMENT_PATH: base/flight-service/kustomization.yaml
+  GITOPS_DEPLOYMENT_PATH: apps/dev/flights
   GITOPS_BRANCH_PREFIX: ci/update-flight-service
 
 jobs:
@@ -45,7 +45,7 @@ jobs:
 
       - name: Update Kustomization
         run: |
-          cd gitops/base/flight-service
+          cd gitops/apps/dev//flights
           kustomize edit set image ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.SERVICE }}=${{ env.IMAGE_SHA }}
     
 
