@@ -7,6 +7,7 @@ resources:
   - flight-deployment.yaml
   - flight-service.yaml
   - flight-pv.yaml
+  - flight-pvc.yaml
   - flights-hpa.yaml
   - flight-service-policy.yaml
   - flight-statefulset.yaml
