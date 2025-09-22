@@ -52,22 +52,21 @@ jobs:
       # ===== DAST =====
       - name: Start Backend
         run: |
-          python app.py &  # replace with your entrypoint
+          python app.py &  # replace with your entrypoin
           sleep 10
 
-      - name: OWASP ZAP Baseline Scan
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}    
+
+      - name: DAST OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
           target: 'http://localhost:5000'  # adjust your backend port
           rules_file_name: '.zap/rules.yml'
         continue-on-error: true
-
-      # ===== Docker Build & Push =====
-      - name: Log in to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
