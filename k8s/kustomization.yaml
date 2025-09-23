@@ -11,7 +11,7 @@ resources:
   - flights-hpa.yaml
   - flight-service-policy.yaml
   - flight-statefulset.yaml
-  - headless-svc.yaml
+  
 
 images:
   - name: sheethalshobi/flight-service
