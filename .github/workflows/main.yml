@@ -77,6 +77,15 @@ jobs:
             ${{ env.IMAGE_SHA }}
             ${{ env.IMAGE_LATEST }}
 
+      # ===== Trivy Image Scan =====
+      - name: Scan Docker Image with Trivy
+        uses: aquasecurity/trivy-action@v0.10.0
+        with:
+          image-ref: ${{ env.IMAGE_SHA }}
+          format: table   # or json/html for reports
+          exit-code: '1'  # fail if vulnerabilities are found
+          ignore-unfixed: false
+
       # ===== GitOps Update =====
       - name: Checkout GitOps repo
         uses: actions/checkout@v4
